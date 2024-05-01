@@ -1,0 +1,14 @@
+# arguments for dataset
+dataset: acdc
+nclass: 4
+crop_size: 256
+data_root: ./dataset/datasets/ACDC
+
+# arguments for training
+epochs: 300
+batch_size: 12 # per GPU x 1 GPU
+lr: 0.01
+conf_thresh: 0.95
+drop_rate: 0.5
+use_threshold_relax: False
+T: 1.0
