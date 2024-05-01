@@ -13,14 +13,14 @@ Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentat
    ```bash
    git clone https://github.com/AiEson/CrossMatch.git
    ```
-3. Install the requirements:
+3. Activate the environment:
+   ```bash
+   conda activate CrossMatch
+   ```
+4. Install the requirements:
    ```bash
    cd CrossMatch
    pip install -r requirements.txt
-   ```
-4. Activate the environment:
-   ```bash
-   conda activate CrossMatch
    ```
 
 # Usage
