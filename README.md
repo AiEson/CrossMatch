@@ -110,6 +110,19 @@ bash scripts/train.sh gpu_num port
 ### Qualitative results
 ![la_qulti](assets/result.jpg)
 
+## Citation
+If you find this project useful, please consider citing:
+```bibtex
+@misc{zhao2024crossmatch,
+      title={CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation}, 
+      author={Bin Zhao and Chunshi Wang and Shuxue Ding},
+      year={2024},
+      eprint={2405.00354},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
 ## Acknowledgement
 * This code is adapted from [UA-MT](https://github.com/yulequan/UA-MT), [DTC](https://github.com/HiLab-git/DTC.git) and [UniMatch](https://github.com/LiheYoung/UniMatch/tree/main/more-scenarios/medical) . 
 * We thank Lequan Yu, Xiangde Luo and Lihe Yang for their elegant and efficient code base.
