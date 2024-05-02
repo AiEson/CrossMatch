@@ -1,6 +1,8 @@
 ## CrossMatch
 Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation
 
+> CrossMatch Paper: https://arxiv.org/abs/2405.00354
+
 ![overview](assets/overview.jpg)
 	
 ## Requirements
@@ -23,15 +25,15 @@ Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentat
    pip install -r requirements.txt
    ```
 
-# Usage
-## LA dataset
+## Usage
+### LA dataset
 One click to run:
 ```bash
 cd LA/code
 bash train.sh
 ```
 
-## ACDC dataset
+### ACDC dataset
 One click to run:
 ```bash
 cd ACDC
@@ -39,7 +41,7 @@ bash scripts/train.sh gpu_num port
 # like `bash scripts/train.sh 4 12333` for 4 GPUs and port 12333
 ```
 
-## Results on the Left Atrium dataset (SOTA).
+## Results
 ### LA dataset results
 
 * The training set consists of 8 labeled scans and 72 unlabeled scans and the testing set includes 20 scans.
