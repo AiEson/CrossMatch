@@ -1,7 +1,7 @@
 ## CrossMatch
 Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation
 
-> CrossMatch Paper: https://arxiv.org/abs/2405.00354
+> CrossMatch Paper: [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
 
 ![overview](assets/overview.jpg)
 	
