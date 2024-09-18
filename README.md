@@ -1,7 +1,7 @@
 ## CrossMatch
 Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation
 
-🎉🎉🎉 This paper has been accepted by JBHI!
+🎉🎉🎉 This paper has been accepted by IEEE Journal of Biomedical and Health Informatics !
 
 > CrossMatch Paper: [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
 
