@@ -3,7 +3,7 @@ Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentat
 
 🎉🎉🎉 This paper has been accepted by IEEE Journal of Biomedical and Health Informatics !
 
-> CrossMatch Paper: [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
+> CrossMatch Paper: [![IEEE](https://img.shields.io/badge/IEEE_Xplore-Early_Access-blue)](https://ieeexplore.ieee.org/document/10684089) [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
 
 ![overview](assets/overview.jpg)
 	
@@ -115,14 +115,16 @@ bash scripts/train.sh gpu_num port
 ## Citation
 If you find this project useful, please consider citing:
 ```bibtex
-@misc{zhao2024crossmatch,
-      title={CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation}, 
-      author={Bin Zhao and Chunshi Wang and Shuxue Ding},
-      year={2024},
-      eprint={2405.00354},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
+@ARTICLE{CrossMatch,
+  author={Zhao, Bin and Wang, Chunshi and Ding, Shuxue},
+  journal={IEEE Journal of Biomedical and Health Informatics}, 
+  title={CrossMatch: Enhance Semi-Supervised Medical Image Segmentation with Perturbation Strategies and Knowledge Distillation}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-13},
+  keywords={Perturbation methods;Data models;Predictive models;Biomedical imaging;Decoding;Accuracy;Training;Semi-supervised segmentation;Self-knowledge distillation;Image perturbation},
+  doi={10.1109/JBHI.2024.3463711}}
 ```
 
 ## Acknowledgement
