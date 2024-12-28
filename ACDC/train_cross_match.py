@@ -198,6 +198,16 @@ def main():
                 pred_u_w_mix = model(img_u_w_mix).detach()
                 conf_u_w_mix = pred_u_w_mix.softmax(dim=1).max(dim=1)[0]
                 mask_u_w_mix = pred_u_w_mix.argmax(dim=1)
+                
+                _, _, pred_u_w_weak_mix, pred_u_w_strong_mix = model(
+                    torch.cat((img_x, img_u_w_mix)),
+                    need_fp=True
+                )
+                conf_u_w_weak_mix = pred_u_w_weak_mix.softmax(dim=1).max(dim=1)[0]
+                mask_u_w_weak_mix = pred_u_w_weak_mix.argmax(dim=1)
+                
+                conf_u_w_strong_mix = pred_u_w_strong_mix.softmax(dim=1).max(dim=1)[0]
+                mask_u_w_strong_mix = pred_u_w_strong_mix.argmax(dim=1)
 
             img_u_s1[
                 cutmix_box1.unsqueeze(1).expand(img_u_s1.shape) == 1
@@ -223,8 +233,6 @@ def main():
             conf_u_w_strong = pred_u_w_strong.softmax(dim=1).max(dim=1)[0]
             mask_u_w_strong = pred_u_w_strong.argmax(dim=1)
             
-            conf_u_s2_weak = pred_u_s2_weak.softmax(dim=1).max(dim=1)[0]
-            mask_u_s2_weak = pred_u_s2_weak.argmax(dim=1)
 
             mask_u_w_cutmixed1, conf_u_w_cutmixed1 = mask_u_w.clone(), conf_u_w.clone()
             mask_u_w_cutmixed2, conf_u_w_cutmixed2 = mask_u_w.clone(), conf_u_w.clone()
@@ -237,11 +245,11 @@ def main():
             mask_u_w_cutmixed2[cutmix_box2 == 1] = mask_u_w_mix[cutmix_box2 == 1]
             conf_u_w_cutmixed2[cutmix_box2 == 1] = conf_u_w_mix[cutmix_box2 == 1]
             
-            mask_u_w_weak_cutmixed2[cutmix_box2 == 1] = mask_u_w_weak[cutmix_box2 == 1]
-            conf_u_w_weak_cutmixed2[cutmix_box2 == 1] = conf_u_w_weak[cutmix_box2 == 1]
+            mask_u_w_weak_cutmixed2[cutmix_box2 == 1] = mask_u_w_weak_mix[cutmix_box2 == 1]
+            conf_u_w_weak_cutmixed2[cutmix_box2 == 1] = conf_u_w_weak_mix[cutmix_box2 == 1]
             
-            mask_u_w_strong_cutmixed2[cutmix_box2 == 1] = mask_u_w_strong[cutmix_box2 == 1]
-            conf_u_w_strong_cutmixed2[cutmix_box2 == 1] = conf_u_w_strong[cutmix_box2 == 1]
+            mask_u_w_strong_cutmixed2[cutmix_box2 == 1] = mask_u_w_strong_mix[cutmix_box2 == 1]
+            conf_u_w_strong_cutmixed2[cutmix_box2 == 1] = conf_u_w_strong_mix[cutmix_box2 == 1]
             
             loss_x = (
                 criterion_ce(pred_x, mask_x)
@@ -305,7 +313,7 @@ def main():
             ) / 4.0 + args.eta * (loss_weak_dec_w_s2 + loss_strong_dec_w_s2) / 2.0
             
             
-            loss = (loss_x + loss_u_s1 * 0.5 + loss_u_s2 * 0.5 + loss_u_w_kd) / 3.0
+            loss = (loss_x + loss_u_s1 * 0.25 + loss_u_s2 * 0.25 + loss_u_w_kd * 0.5) / 2.0
 
             torch.distributed.barrier()
 

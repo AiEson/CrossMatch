@@ -73,7 +73,7 @@ def test_single_volume(case, net, test_save_path):
 
 
 def Inference():
-    with open('splits/acdc/test.txt', 'r') as f:
+    with open('splits/acdc/val.txt', 'r') as f:
         image_list = f.readlines()
     image_list = sorted([item.replace('\n', '').split(".")[0]
                          for item in image_list])
