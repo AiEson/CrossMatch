@@ -38,7 +38,7 @@ parser.add_argument(
     default="../data/2018LA_Seg_Training Set/",
     help="Name of Experiment",
 )
-parser.add_argument("--exp", type=str, default="distill_match", help="model_name")
+parser.add_argument("--exp", type=str, default="cross_match", help="model_name")
 parser.add_argument(
     "--max_iterations", type=int, default=9000, help="maximum epoch number to train"
 )
@@ -56,7 +56,7 @@ parser.add_argument(
     "--eta", type=float, default=0.3, help="weight to balance loss"
 )
 parser.add_argument("--optimizer", type=str, default="AdamW", help="optimizer")
-parser.add_argument("--conf_thresh", type=float, default=0.85, help="conf_thresh")
+parser.add_argument("--conf_thresh", type=float, default=0.75, help="conf_thresh")
 parser.add_argument("--temperature", type=float, default=1, help="temperature")
 
 parser.add_argument('--pert_gap', type=float, default=0.5, help='the perturbation gap')
@@ -233,6 +233,16 @@ if __name__ == "__main__":
                 pred_u_w_mix = net(img_u_w_mix).detach()
                 conf_u_w_mix = pred_u_w_mix.softmax(dim=1).max(dim=1)[0]
                 mask_u_w_mix = pred_u_w_mix.argmax(dim=1)
+                
+                _, _, pred_u_w_weak_mix, pred_u_w_strong_mix = net(
+                    torch.cat((img_x, img_u_w_mix)),
+                    need_fp=True
+                )
+                conf_u_w_weak_mix = pred_u_w_weak_mix.softmax(dim=1).max(dim=1)[0]
+                mask_u_w_weak_mix = pred_u_w_weak_mix.argmax(dim=1)
+                
+                conf_u_w_strong_mix = pred_u_w_strong_mix.softmax(dim=1).max(dim=1)[0]
+                mask_u_w_strong_mix = pred_u_w_strong_mix.argmax(dim=1)
 
             img_u_s1[
                 cutmix_box1.unsqueeze(1).expand(img_u_s1.shape) == 1
@@ -281,11 +291,11 @@ if __name__ == "__main__":
             mask_u_w_cutmixed2[cutmix_box2 == 1] = mask_u_w_mix[cutmix_box2 == 1]
             conf_u_w_cutmixed2[cutmix_box2 == 1] = conf_u_w_mix[cutmix_box2 == 1]
             
-            mask_u_w_weak_cutmixed2[cutmix_box2 == 1] = mask_u_w_weak[cutmix_box2 == 1]
-            conf_u_w_weak_cutmixed2[cutmix_box2 == 1] = conf_u_w_weak[cutmix_box2 == 1]
+            mask_u_w_weak_cutmixed2[cutmix_box2 == 1] = mask_u_w_weak_mix[cutmix_box2 == 1]
+            conf_u_w_weak_cutmixed2[cutmix_box2 == 1] = conf_u_w_weak_mix[cutmix_box2 == 1]
             
-            mask_u_w_strong_cutmixed2[cutmix_box2 == 1] = mask_u_w_strong[cutmix_box2 == 1]
-            conf_u_w_strong_cutmixed2[cutmix_box2 == 1] = conf_u_w_strong[cutmix_box2 == 1]
+            mask_u_w_strong_cutmixed2[cutmix_box2 == 1] = mask_u_w_strong_mix[cutmix_box2 == 1]
+            conf_u_w_strong_cutmixed2[cutmix_box2 == 1] = conf_u_w_strong_mix[cutmix_box2 == 1]
             
 
             loss_x = (
@@ -350,7 +360,7 @@ if __name__ == "__main__":
                 loss_weak_dec_w_t + loss_strong_dec_w_t + loss_weak_dec_w_s2_t + loss_strong_dec_w_s2_t
             ) / 4.0 + eta * (loss_weak_dec_w_s2 + loss_strong_dec_w_s2) / 2.0
             
-            loss = (loss_x + loss_u_s1 * 0.5 + loss_u_s2 * 0.5 + loss_u_w_kd) / 3.0
+            loss = (loss_x + loss_u_s1 * 0.25 + loss_u_s2 * 0.25 + loss_u_w_kd) / 2.0
             
             conf_thresh = (
                 args.conf_thresh + (1 - args.conf_thresh) * ramps.sigmoid_rampup(iter_num, 17000)
