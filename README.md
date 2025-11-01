@@ -3,7 +3,7 @@ Code for this paper: CrossMatch: Enhance Semi-Supervised Medical Image Segmentat
 
 🎉🎉🎉 This paper has been accepted by IEEE Journal of Biomedical and Health Informatics !
 
-> CrossMatch Paper: [![IEEE](https://img.shields.io/badge/IEEE_Xplore-Early_Access-blue)](https://ieeexplore.ieee.org/document/10684089) [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
+> CrossMatch Paper: [![IEEE](https://img.shields.io/badge/IEEE-Xplore-blue)](https://ieeexplore.ieee.org/document/10684089) [![arXiv](https://img.shields.io/badge/arXiv-2405.00354-b31b1b.svg)](https://arxiv.org/abs/2405.00354)
 
 ![overview](assets/overview.jpg)
 	
