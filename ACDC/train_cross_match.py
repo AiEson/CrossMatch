@@ -191,9 +191,8 @@ def main():
             cutmix_box1, cutmix_box2 = cutmix_box1.cuda(), cutmix_box2.cuda()
             img_u_w_mix = img_u_w_mix.cuda()
             img_u_s1_mix, img_u_s2_mix = img_u_s1_mix.cuda(), img_u_s2_mix.cuda()
-
             with torch.no_grad():
-                model.eval()
+                # model.eval()  # Avoid Dropout not taking effect in eval mode
 
                 pred_u_w_mix = model(img_u_w_mix).detach()
                 conf_u_w_mix = pred_u_w_mix.softmax(dim=1).max(dim=1)[0]

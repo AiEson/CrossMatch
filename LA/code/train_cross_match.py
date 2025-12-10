@@ -229,7 +229,7 @@ if __name__ == "__main__":
             img_u_s1_mix, img_u_s2_mix = img_u_s1_mix.cuda(), img_u_s2_mix.cuda()
             
             with torch.no_grad():
-                net.eval()
+                # net.eval()  # Avoid Dropout not taking effect in eval mode
                 pred_u_w_mix = net(img_u_w_mix).detach()
                 conf_u_w_mix = pred_u_w_mix.softmax(dim=1).max(dim=1)[0]
                 mask_u_w_mix = pred_u_w_mix.argmax(dim=1)
